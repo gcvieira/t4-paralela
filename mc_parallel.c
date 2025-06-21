@@ -12,7 +12,7 @@ int main(int argc, char *argv[]) {
 	if (rank == 0) {
 		if (argc != 2) {
 			fprintf(stderr, "Uso: %s <total_de_pontos>\n", argv[0]);
-			MPI_Abort(MPI_COMM_WORLD, 1);
+			exit(1);
 		}
 		total_pontos = atoi(argv[1]);
 	}
