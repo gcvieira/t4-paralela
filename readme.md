@@ -8,13 +8,27 @@ Transformar o trabalho 2, que utiliza apenas MPI, em um programa hibrido que uti
 Sequencial:
 
 ```
-gcc pw_crack_seq.c -o crack_sequencial -lcrypto
-./crack_sequencial
+gcc mc_sequential.c -o seq
+./seq
+```
+
+OpenMP:
+
+```
+gcc mc_parallel.c -o parallel
+srun --exclusive -N 1 ./parallel
 ```
 
 MPI:
 
 ```
-ladcomp -env mpicc pw_crack_mpi.c -o crack_mpi -lcrypto
-srun -N 4 -n 8 --exclusive ./crack_mpi
+ladcomp -env mpicc mc_mpi.c -o mpi
+srun --exclusive -N 2 -n 2 ./mpi
+```
+
+Hybrid (OpenMP + MPI):
+
+```
+ladcomp --env mpiompcc mc_hybrid.c -o hybrid
+srun --exclusive -N 2 -n 2 ./hybrid
 ```
